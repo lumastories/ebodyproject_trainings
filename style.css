@@ -1,0 +1,21 @@
+#game{
+    margin:0 auto;
+    width:600px;
+    height:200px;
+}
+
+.dashed{
+    border: 5px black dashed;
+}
+
+.solid{
+    border: 5px black solid;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
