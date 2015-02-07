@@ -58,7 +58,12 @@ function slideIt(){
     step=0;
   }
 }
-setInterval(slideIt, 1250);
+var handle = setInterval(slideIt, 1250);
+
+var test = setTimeout(function() {
+  console.log("sadf");
+  test = null;
+},10000);
 
 // Event Listeners
 $( "body" ).keypress(function( event ) {
@@ -69,19 +74,23 @@ $( "body" ).keypress(function( event ) {
     
     if(stimuli[step].left  && !dashed){
       console.log('correct');
+
     }else{
       console.log('WRONG');
+
     }
     console.log(stimuli[step]);
   }
-
+// have the setInterval Kick off the setTimeout only if the setTimeout handler is empty.
   if(event.which==109){ // m
     response_time = time_shown - _.now();
     console.log(response_time);
     if(!stimuli[step].left && !dashed){
       console.log('correct');
+      //
     }else{
       console.log('WRONG');
+      //
     }
     console.log(stimuli[step]);
   }
