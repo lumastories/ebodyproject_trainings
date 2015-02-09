@@ -59,13 +59,14 @@ function getAverageResponseTime() {
 }
 
 function getScore(){
-  var trials = jsPsych.data.getTrialsOfType('single-stim');
+  
+  var trials = _.zip(all_trials,jsPsych.data.getTrialsOfType('single-stim'));
   var total = _.filter(all_trials,function(t){return t.go}).length;
-  console.log(all_trials);
   var points = 0;
-  for (var i = 0; i < total; i++) {
-    if(all_trials[i].go){
-      if(trials[i].key_press==all_trials[i].correct_key) {points++;}
+  
+  for (var i = 0; i < trials.length; i++) {
+    if(trials[i][0].go){
+      if(trials[i][0].key_press==trials[i][1].correct_key) {points++;}
     }
   }
   return {
