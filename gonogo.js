@@ -1,4 +1,10 @@
 'use strict';
+
+// TODO:
+// - display red X when response is incorrect
+// - mix in water glass stimuli (or equiv.)
+// - change length of display times
+
 var stimuli_images = [
   'img/healthy0.jpg',
   'img/healthy1.jpg',
@@ -50,7 +56,7 @@ function getScore(){
     var go = trials[i][0].go;
     var correct = trials[i][1].key_press == trials[i][0].correct_key;
     // hits
-    if(go&&correct){points++;}}
+    if(go&&correct){points++;}
     // misses
     if(!go&&key_press!=-1){num_incorrect++;}
   }
