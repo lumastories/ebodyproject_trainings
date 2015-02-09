@@ -1,13 +1,4 @@
-var welcome_block = {
-  type:"text",
-  text:"<h1 class='center-content'>Welcome to the experiment.<br /> Press any key to begin.</h1>",
-  is_html:true
-}
-var instructions_block = {
-  type: "text",
-  text: "<h1 class='center-content'>Press C for images on the left side and M for images on the right side. <br> If the image has a dashed border do not press any key.</h1>",
-  is_html:true
-};
+'use strict';
 var stimuli_images = [
   'img/healthy0.jpg',
   'img/healthy1.jpg',
@@ -20,12 +11,11 @@ var stimuli_images = [
   'img/junk3.jpg',
   'img/junk4.jpg'
 ];
-
-var test_stimuli = _.map(stimuli_images,
+var TRIAL_DATA = _.map(jsPsych.randomization.repeat(stimuli_images, 2),
   function(image){
     var s='left',k=77,b='5px solid #000',go=true;
     if(Math.floor(Math.random()*10)%2){s='right';k=67}
-    if(image.substring(4,5)=='j'){go=false;b='5px dashed #000'}
+    if(image.substring(4,5)=='j'){go=false;b='5px dashed #000'} // !!
     return { 
       stimulus: image,
       side: s,
@@ -35,15 +25,7 @@ var test_stimuli = _.map(stimuli_images,
     }
   });
 
-var all_trials = jsPsych.randomization.repeat(test_stimuli, 2);
-var the_trials = _.map(all_trials, function(t){return "<img src='"+t.stimulus+"' style='margin:0 auto;float:"+t.side+";padding-"+t.side+":500px;border:"+t.border+";'/>";})
-var test_block = {
-  type: "single-stim",
-  stimuli: the_trials,
-  is_html: true,
-  choices: ['c','m'],
-  timing_response: 1500
-}
+// ------ HELPER FUNCTIONS
 
 function getAverageResponseTime() {
   var trials = jsPsych.data.getTrialsOfType('single-stim');
@@ -59,26 +41,49 @@ function getAverageResponseTime() {
 }
 
 function getScore(){
-  
-  var trials = _.zip(all_trials,jsPsych.data.getTrialsOfType('single-stim'));
-  var total = _.filter(all_trials,function(t){return t.go}).length;
+  var trials = _.zip(TRIAL_DATA,jsPsych.data.getTrialsOfType('single-stim'));
+  var total = _.filter(TRIAL_DATA,function(t){return t.go}).length;
   var points = 0;
+  var num_incorrect = 0;
   
   for (var i = 0; i < trials.length; i++) {
-    if(trials[i][0].go){
-      if(trials[i][0].key_press==trials[i][1].correct_key) {points++;}
-    }
+    var go = trials[i][0].go;
+    var correct = trials[i][1].key_press == trials[i][0].correct_key;
+    // hits
+    if(go&&correct){points++;}}
+    // misses
+    if(!go&&key_press!=-1){num_incorrect++;}
   }
   return {
     string:points+"/"+total,
-    percent:(points/total)*100
+    percent:(points/total)*100,
+    num_incorrect:num_incorrect
   }
 }
 
+// BLOCKS
+var welcome_block = {
+  type:"text",
+  text:"<h1 class='center-content'>Welcome to the experiment.<br /> Press any key to begin.</h1>",
+  is_html:true
+}
+var instructions_block = {
+  type: "text",
+  text: "<h1 class='center-content'>Press C for images on the left side and M for images on the right side. <br> If the image has a dashed border do not press any key.</h1>",
+  is_html:true
+}
+var test_block = {
+  type: "single-stim",
+  stimuli: _.map(TRIAL_DATA, function(t){return "<img src='"+t.stimulus+"' style='margin:0 auto;float:"+t.side+";padding-"+t.side+":500px;border:"+t.border+";'/>";}),
+  is_html: true,
+  choices: ['c','m'],
+  timing_response: 1500
+}
 var debrief_block = {
   type: "text",
   text: function() {
-  return "<h1><span style='color:blue;'>"+getScore().percent+"%</span><ul><li>Average response time: "+getAverageResponseTime()+"ms</li><li>Score: "+ getScore().string +"</li></ul><br/> Press any key to complete the experiment. Thank you!</h1>";
+  return "<h1><span style='color:blue;'>"+getScore().percent
+  +"%</span><ul><li>Average response time: "+getAverageResponseTime()+"ms</li><li>Score: "+ getScore().string +"</li><li># Misses: "+getScore().num_incorrect+"</li></ul><br/> Press any key to complete the experiment. Thank you!</h1>";
   }
 };
 
@@ -93,7 +98,7 @@ jsPsych.preloadImages(stimuli_images, function(){ startExperiment(); });
 function startExperiment(){
   jsPsych.init({
       experiment_structure: experiment,
-      on_finish: function(data) {
+      on_finish: function(data) { // for debugging
       jsPsych.data.displayData('json');
     }
   });
