@@ -83,7 +83,10 @@ var debrief_block = {
   type: "text",
   text: function() {
   return "<h1><span style='color:blue;'>"+getScore().percent
-  +"%</span><ul><li>Average response time: "+getAverageResponseTime()+"ms</li><li>Score: "+ getScore().string +"</li><li># Misses: "+getScore().num_incorrect+"</li></ul><br/> Press any key to complete the experiment. Thank you!</h1>";
+  +"%</span><ul><li>Average response time: "+getAverageResponseTime()
+  +"ms</li><li>Score: "+getScore().string 
+  +"</li><li># Misses: "+getScore().num_incorrect
+  +"</li></ul><br/> Press any key to complete the experiment. Thank you!</h1>";
   }
 };
 
