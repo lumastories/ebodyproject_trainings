@@ -17,7 +17,7 @@ var stimuli_images = [
   'img/junk3.jpg',
   'img/junk4.jpg'
 ];
-var TRIAL_DATA = _.map(jsPsych.randomization.repeat(stimuli_images, 2),
+var TRIAL_DATA = _.map(jsPsych.randomization.repeat(stimuli_images, 1),
   function(image){
     var s='left',k=77,b='5px solid #000',go=true;
     if(Math.floor(Math.random()*10)%2){s='right';k=67}
@@ -49,16 +49,10 @@ function getAverageResponseTime() {
 function getScore(){
   var trials = _.zip(TRIAL_DATA,jsPsych.data.getTrialsOfType('single-stim'));
   var total = _.filter(TRIAL_DATA,function(t){return t.go}).length;
-  var points = 0;
-  var num_incorrect = 0;
-  
+  var points = 0, num_incorrect = 0;
   for (var i = 0; i < trials.length; i++) {
-    var go = trials[i][0].go;
-    var correct = trials[i][1].key_press == trials[i][0].correct_key;
-    // hits
-    if(go&&correct){points++;}
-    // misses
-    if(!go&&key_press!=-1){num_incorrect++;}
+    if(trials[i][0].go&&(trials[i][0].correct_key==trials[i][1].key_press)){points++;}
+    if(!trials[i][0].go&&trials[i][1].key_press!=-1){num_incorrect++;}
   }
   return {
     string:points+"/"+total,
@@ -80,7 +74,7 @@ var instructions_block = {
 }
 var test_block = {
   type: "single-stim",
-  stimuli: _.map(TRIAL_DATA, function(t){return "<img src='"+t.stimulus+"' style='margin:0 auto;float:"+t.side+";padding-"+t.side+":500px;border:"+t.border+";'/>";}),
+  stimuli: _.map(TRIAL_DATA, function(t){return "<img src='"+t.stimulus+"' style='float:"+t.side+";padding-"+t.side+":500px;border:"+t.border+";'/>";}),
   is_html: true,
   choices: ['c','m'],
   timing_response: 1500
