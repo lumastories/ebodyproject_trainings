@@ -142,7 +142,7 @@ for (var j = 0; j < 6; j++) {
                 getNumberWrongSide()+"</li></ul></p><hr><h1>Press any key to continue.</h1>";},
       is_html:true
   }
-  experiment.push(score_block;
+  experiment.push(score_block);
 };
 
 
