@@ -134,14 +134,15 @@ for (var j = 0; j < 6; j++) {
   };
 
   var score_block = {
+    
       type:"text",
-      text: function(){return"<h1>Results</h1><p><ul><li>Percent Correct: "+getPercentCorrect()+"</li><li>Average Response Time: "+
+      text: function(){return "<h1>Results</h1><p><ul><li>Percent Correct: "+getPercentCorrect()+"</li><li>Average Response Time: "+
                 getAverageResponseTime()+"ms</li><li># Correct: "+
                 getNumberCorrect()+"/"+getNumberGo()+"</li> <li># Wrong Side: "+
                 getNumberWrongSide()+"</li></ul></p><hr><h1>Press any key to continue.</h1>";},
       is_html:true
-    }
-  experiment.push(score_block);
+  }
+  experiment.push(score_block;
 };
 
 
