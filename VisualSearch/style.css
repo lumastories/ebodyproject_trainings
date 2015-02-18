@@ -9,5 +9,8 @@ table{
     margin:0 auto;
 }
 td{
-    padding:4px;
+    padding:8px;
+}
+img{
+    text-align: center;
 }
