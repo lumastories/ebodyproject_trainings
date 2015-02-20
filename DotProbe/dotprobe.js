@@ -33,31 +33,37 @@ function averageOnRight(image_pair){
   }
 }
 
-var answer = [];
-var image_pairs = [];
-var image_html_pairs = []; // let's build it!
-var diptics = _.zip(_.shuffle(stim_ultra), _.shuffle(stim_average)); // 80 pairs
-for (var i = diptics.length - 1; i >= 0; i--) {
-  image_pairs.push(_.shuffle(diptics[i]));
-};
-for (var i = image_pairs.length - 1; i >= 0; i--) {
-  var dot_html = '';
-  if (averageOnRight(image_pairs[i])){
-    dot_html = buildTable("","<span style='font-size:4em;'>&#9679;</span>");
-    answer.push('same');
-  } else {
-    dot_html = buildTable("<span style='font-size:4em;'>&#9679;</span>","");
-    answer.push('different');
+function getTrials(number_of_trials){
+  var answer = [];
+  var image_pairs = [];
+  var image_html_pairs = []; // let's build it!
+  var diptics = _.zip(_.shuffle(stim_ultra), _.shuffle(stim_average)); // 80 pairs
+  for (var i = number_of_trials; i > 0; i--) {
+    image_pairs.push(_.shuffle(diptics[i]));
+  };
+
+  for (var i = image_pairs.length - 1; i >= 0; i--) {
+    var dot_html = '';
+    if (averageOnRight(image_pairs[i])){
+      dot_html = buildTable("","<span style='font-size:4em;'>&#9679;</span>");
+      answer.push('different');
+    } else {
+      dot_html = buildTable("<span style='font-size:4em;'>&#9679;</span>","");
+      answer.push('same');
+    }
+
+    image_html_pairs.push([buildTable("<img src='"+image_pairs[i][0]+"'>",
+                                      "<img src='"+image_pairs[i][1]+"'>"),
+                                      dot_html]);
+  };
+  return {
+    answer:answer,
+    stimuli:image_html_pairs
   }
-
-  image_html_pairs.push([buildTable("<img src='"+image_pairs[i][0]+"'>",
-                                    "<img src='"+image_pairs[i][1]+"'>"),
-                                    dot_html]);
-};
-
+}
 
 function getAverageResponseTime() {
-  var trial_data = jsPsych.data.getTrialsOfType('single-stim');
+  var trial_data = jsPsych.data.getTrialsOfType('same-different');
   var sum_rt = 0;
   var valid_trial_count = 0;
   for (var i = 0; i < trial_data.length; i++) {
@@ -69,6 +75,17 @@ function getAverageResponseTime() {
   return Math.floor(sum_rt / valid_trial_count);
 }
 
+function getPercentCorrect(){
+  var trial_data = jsPsych.data.getTrialsOfType('same-different');
+  var num_correct = 0
+  for (var i = trial_data.length - 1; i >= 0; i--) {
+    if(trial_data[i].correct){
+      num_correct+=1
+    }
+  }
+  return Math.floor(100*(num_correct/trial_data.length));
+}
+
 // BLOCKS
 var welcome_block = {
   type:"text",
@@ -76,17 +93,31 @@ var welcome_block = {
   is_html:true
 }
 
-var trial_block = {
-  type:'same-different',
-  stimuli:image_html_pairs,
-  answer:answer,
-  same_key:'M',
-  different_key:'C',
-  is_html:true,
+var trials1 = getTrials(40);
+var trials2 = getTrials(40);
+var trials3 = getTrials(40);
+var trials4 = getTrials(40);
+var trials5 = getTrials(40);
+var trials6 = getTrials(40);
+var trials7 = getTrials(40);
+var trials8 = getTrials(40);
 
-  timing_first_stim:500,
-  timing_gap:5,
-  timing_second_stim:-1
+var trial1_block = {type:'same-different',stimuli:trials1.stimuli,answer:trials1.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
+var trial2_block = {type:'same-different',stimuli:trials2.stimuli,answer:trials2.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
+var trial3_block = {type:'same-different',stimuli:trials3.stimuli,answer:trials3.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
+var trial4_block = {type:'same-different',stimuli:trials4.stimuli,answer:trials4.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
+var trial5_block = {type:'same-different',stimuli:trials5.stimuli,answer:trials5.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
+var trial6_block = {type:'same-different',stimuli:trials6.stimuli,answer:trials6.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
+var trial7_block = {type:'same-different',stimuli:trials7.stimuli,answer:trials7.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
+var trial8_block = {type:'same-different',stimuli:trials8.stimuli,answer:trials8.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
+
+var results_block = {
+    type:"text",
+    text:function(){
+      return "<h1>Results</h1><p> <ul><li>Average Response Time: "+
+      getAverageResponseTime()+"ms</li><li>% Correct: "+getPercentCorrect()+"%</li></ul> </p><p>Press any key to continue</p>"
+    },
+    is_html:true
 }
 
 var last_block = {
@@ -97,8 +128,24 @@ var last_block = {
 
 var experiment = [];
 experiment.push(welcome_block);
-experiment.push(trial_block);
+experiment.push(trial1_block);
+experiment.push(results_block);
+experiment.push(trial2_block);
+experiment.push(results_block);
+experiment.push(trial3_block);
+experiment.push(results_block);
+experiment.push(trial4_block);
+experiment.push(results_block);
+experiment.push(trial5_block);
+experiment.push(results_block);
+experiment.push(trial6_block);
+experiment.push(results_block);
+experiment.push(trial7_block);
+experiment.push(results_block);
+experiment.push(trial8_block);
+experiment.push(results_block);
 experiment.push(last_block);
+
 
 
 jsPsych.preloadImages(stimuli_images, function(){ startExperiment(); });
@@ -106,9 +153,6 @@ jsPsych.preloadImages(stimuli_images, function(){ startExperiment(); });
 function startExperiment(){
   jsPsych.init({
       experiment_structure: experiment,
-      show_progress_bar: true,
-      on_finish: function(data) { // for debugging
-      jsPsych.data.displayData('json');
-    }
+      show_progress_bar: true
   });
 }
