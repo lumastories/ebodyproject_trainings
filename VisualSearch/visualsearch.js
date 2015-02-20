@@ -3,13 +3,11 @@ var stim_ultra = ['Stimuli/eUltraT1.jpg', 'Stimuli/eUltraT2.jpg', 'Stimuli/eUltr
 var RESULTS = [];
 var ALL_RESULTS = [];
 
-var MATRIX_X_SIZE = 2;
-var MATRIX_Y_SIZE = 5;
-var TRIALS_PER_BLOCK = 10;
-var BLOCK_NUM = 2;
-
+var MATRIX_X_SIZE = 4;
+var MATRIX_Y_SIZE = 4;
+var TRIALS_PER_BLOCK = 30;
+var BLOCK_NUM = 4;
 var TRIAL_COUNT = 0;
-var BLOCK_COUNT = 0;
 
 function getCoord(){
   var x = Math.floor(Math.random()*10)%MATRIX_X_SIZE;
@@ -23,11 +21,18 @@ function getCoord(){
 }
 
 function getScore(){
-
   return {
     simple : _.filter(RESULTS,function(r){return r.correct;}).length+'/'+RESULTS.length,
     percent : Math.floor(100*_.filter(RESULTS,function(r){return r.correct;}).length/RESULTS.length)+'%'
   }
+}
+
+function getAverageRT(){
+  var total_rt = 0;
+  for (var i = RESULTS.length - 1; i >= 0; i--) {
+    total_rt += RESULTS[i].rt
+  };
+  return Math.floor(total_rt/RESULTS.length)+'ms'
 }
 
 function buildImageMatrix(incorrect, correct){
@@ -42,7 +47,6 @@ function buildImageMatrix(incorrect, correct){
   }
   correct_coords = [getCoord().x, getCoord().y]
   matrix[correct_coords[0]][correct_coords[1]] = c;
-
   return matrix;
 }
 
@@ -77,22 +81,15 @@ function nextTrialArray(){
     if(String($el.attr('src')).slice(9,10)=='A'){
       $el.parent().addClass('correct');
       $el.addClass('animated tada');
-      
-      // $incorrect_el = $(_.filter($('img'), function(img){return $(img).attr('src').slice(9,10)=='U';}));
-      // $incorrect_el.parent().addClass('correct');
-      // $incorrect_el.addClass('animated zoomOut');
-
-      RESULTS.push({rt:Math.abs(now-Date.now()), correct:true})
+      RESULTS.push({rt:Math.abs(Date.now()-now), correct:true})
     } else {
 
       $el.parent().addClass('incorrect');
       $el.addClass('animated shake');
-      RESULTS.push({rt:Math.abs(now-Date.now()), correct:false})
-
+      RESULTS.push({rt:Math.abs(Date.now()-now), correct:false})
       $correct_el = $(_.find($('img'), function(img){return $(img).attr('src').slice(9,10)=='A';}));
       $correct_el.parent().addClass('correct');
       $correct_el.addClass('animated wobble');
-
     }
 
     setTimeout(function(){
@@ -102,23 +99,20 @@ function nextTrialArray(){
     }, 2000);
 
     setTimeout(function(){
-      // Show everything 500ms after hiding
-      if(TRIAL_COUNT==TRIALS_PER_BLOCK){
-        TRIAL_COUNT=0;
-        if(BLOCK_COUNT==BLOCK_NUM){
-          // end trials
-          $('body').html("<h1>Great job! That's all there is.</h1>");
-          console.log(ALL_RESULTS);
-
-        }
-        BLOCK_COUNT++;
-        
-        $('body').html(function(){return "<h1 id='skippy'>So far so good...</h1><p><ul><li>Percentage Correct:"+getScore().percent+"</li><li>Score: "+getScore().simple+"</li></ul>Click <a href='#' id='skippy'>here</a> to continue.</p>";});
+      if(TRIALS_PER_BLOCK*BLOCK_NUM==TRIAL_COUNT){
+          // Last trial scores and ALL scores.
+          $('body').html(function(){return "<h1>Results</h1><p><ul><li>Percentage Correct: "+
+            getScore().percent+"</li><li>Score: "+
+            getScore().simple+"</li><li>"+
+            getAverageRT()+"</li></ul></p> <h1>This concludes all the trials.</h1> ";});
+      }else if(TRIAL_COUNT/TRIALS_PER_BLOCK==1){
+        $('body').html(function(){return "<h1>Results</h1><p><ul><li>Percentage Correct: "+
+          getScore().percent+"</li><li>Score: "+
+          getScore().simple+"</li><li>"+
+          getAverageRT()+"</li></ul>Click <a href='#' id='skippy'>here</a> to continue.</p>";});
         skipOnKey();
         now = Date.now();
         nextTrialArray();
-        ALL_RESULTS.push(RESULTS); // save last trials results
-        RESULTS = []; // clear RESULTS
       }else{
         $('body').html(matrix_to_html(buildImageMatrix(stim_ultra,stim_average)));
         now = Date.now();

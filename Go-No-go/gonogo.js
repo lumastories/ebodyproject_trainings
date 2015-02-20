@@ -158,9 +158,6 @@ jsPsych.preloadImages(stimuli_images, function(){ startExperiment(); });
 function startExperiment(){
   jsPsych.init({
       experiment_structure: experiment,
-      show_progress_bar: true,
-      on_finish: function(data) { // for debugging
-      jsPsych.data.displayData('json');
-    }
+      show_progress_bar: true
   });
 }
