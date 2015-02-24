@@ -89,7 +89,13 @@ var results_block = {
 
 var last_block = {
     type:"text",
-    text:"<h1>The trials are complete.<h1><p>Thank you for your time.</p>",
+    text:function(){
+
+      return "<p>Great work! These are your totals for the game:</p> <ul> <li><strong># correct</strong> <span style='color:red;'>"+
+      getTotalCorrect()+"</span></li> <li><strong>% correct</strong> <span style='color:red;'>"+
+      getPercentCorrect()+"%</span></li> <li><strong>Average RT</strong> <span style='color:red;'>"+
+      getAverageResponseTime()+"</span></li> </ul> <p>Congratulations on finishing Module 3!</p>";
+    },
     is_html:true
 }
 var experiment = [];
