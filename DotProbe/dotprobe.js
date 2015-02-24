@@ -19,49 +19,6 @@ stimuli_images.push(stim_ultra);
 stimuli_images.push(stim_average);
 function l(x){console.log(x);}
 
-function buildTable(left,right){
-  return "<table><tr><td>"+left+"</td><td>"+right+"</td></tr></table>";
-}
-
-function averageOnRight(image_pair){
-  // Takes a tuple and returns true if 
-  // the average weight women is in index 1
-  if (image_pair[1].slice(9,10)=='A'){
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function getTrials(number_of_trials){
-  var answer = [];
-  var image_pairs = [];
-  var image_html_pairs = []; // let's build it!
-  var diptics = _.zip(_.shuffle(stim_ultra), _.shuffle(stim_average)); // 80 pairs
-  for (var i = number_of_trials; i > 0; i--) {
-    image_pairs.push(_.shuffle(diptics[i]));
-  };
-
-  for (var i = image_pairs.length - 1; i >= 0; i--) {
-    var dot_html = '';
-    if (averageOnRight(image_pairs[i])){
-      dot_html = buildTable("","<span style='font-size:4em;'>&#9679;</span>");
-      answer.push('different');
-    } else {
-      dot_html = buildTable("<span style='font-size:4em;'>&#9679;</span>","");
-      answer.push('same');
-    }
-
-    image_html_pairs.push([buildTable("<img src='"+image_pairs[i][0]+"'>",
-                                      "<img src='"+image_pairs[i][1]+"'>"),
-                                      dot_html]);
-  };
-  return {
-    answer:answer,
-    stimuli:image_html_pairs
-  }
-}
-
 function getAverageResponseTime() {
   var trial_data = jsPsych.data.getTrialsOfType('same-different');
   var sum_rt = 0;
@@ -77,45 +34,55 @@ function getAverageResponseTime() {
 
 function getPercentCorrect(){
   var trial_data = jsPsych.data.getTrialsOfType('same-different');
-  var num_correct = 0
-  for (var i = trial_data.length - 1; i >= 0; i--) {
-    if(trial_data[i].correct){
-      num_correct+=1
-    }
-  }
+  var num_correct = _.filter(trial_data,function(el){return el.correct}).length
   return Math.floor(100*(num_correct/trial_data.length));
+}
+
+function getTotalCorrect(){
+  return 12; // TODO
+}
+
+function buildTable(left,right){
+  return "<table><tr><td>"+left+"</td><td>"+right+"</td></tr></table>";
+}
+
+function averageOnRight(image_pair){
+  var right_side = true;
+  if (image_pair[1].slice(9,10)=='A'){
+    right_side = true;
+  } else {
+    right_side = false;
+  }
+  if(chance10()){
+    right_side = !right_side;
+  }
+  return right_side;
+}
+
+function chance10(){
+  // This returns true 10% of the time.
+  return (Math.floor(Math.random()*10)%10)==1?true:false;
+}
+
+function flip(arr){
+  return [arr[1], arr[0]];
 }
 
 // BLOCKS
 var welcome_block = {
   type:"text",
-  text:"<h1>Welcome to the experiment.</h1><p> <strong>Instructions</strong> &mdash; Press C when you see a &#9679; on the left and M when you see a &#9679; on the right.</p><p>Press any key to begin.</p>",
+  text:"<h3>Instructions:</h3> <p>In this game, you will see two pictures on the screen. The pictures will disappear and a dot will replace one of the two photos. </p> <p>Your job is to press the \"c\" if the dot appears behind the left photograph was or \"m\" if the dot appears behind the right photograph.</p> <p>Do your best to respond as quickly and accurately as possible.</p><p>Press any key to begin</p>",
   is_html:true
 }
-
-var trials1 = getTrials(40);
-var trials2 = getTrials(40);
-var trials3 = getTrials(40);
-var trials4 = getTrials(40);
-var trials5 = getTrials(40);
-var trials6 = getTrials(40);
-var trials7 = getTrials(40);
-var trials8 = getTrials(40);
-
-var trial1_block = {type:'same-different',stimuli:trials1.stimuli,answer:trials1.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
-var trial2_block = {type:'same-different',stimuli:trials2.stimuli,answer:trials2.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
-var trial3_block = {type:'same-different',stimuli:trials3.stimuli,answer:trials3.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
-var trial4_block = {type:'same-different',stimuli:trials4.stimuli,answer:trials4.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
-var trial5_block = {type:'same-different',stimuli:trials5.stimuli,answer:trials5.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
-var trial6_block = {type:'same-different',stimuli:trials6.stimuli,answer:trials6.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
-var trial7_block = {type:'same-different',stimuli:trials7.stimuli,answer:trials7.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
-var trial8_block = {type:'same-different',stimuli:trials8.stimuli,answer:trials8.answer,same_key:67,different_key:77,is_html:true,timing_first_stim:500,timing_gap:5,timing_second_stim:-1}
 
 var results_block = {
     type:"text",
     text:function(){
-      return "<h1>Results</h1><p> <ul><li>Average Response Time: "+
-      getAverageResponseTime()+"ms</li><li>% Correct: "+getPercentCorrect()+"%</li></ul> </p><p>Press any key to continue</p>"
+
+      return "<p>Let's take a look at how you're doing:</p> <ul> <li><strong># correct</strong> <span style='color:red;'>"+
+      getTotalCorrect()+"</span></li> <li><strong>% correct</strong> <span style='color:red;'>"+
+      getPercentCorrect()+"%</span></li> <li><strong>Average RT</strong> <span style='color:red;'>"+
+      getAverageResponseTime()+"</span></li> </ul> <p>Nice job!  Let's see if you can respond even faster this time around!</p><p>Press any key to continue</p>";
     },
     is_html:true
 }
@@ -125,28 +92,58 @@ var last_block = {
     text:"<h1>The trials are complete.<h1><p>Thank you for your time.</p>",
     is_html:true
 }
-
 var experiment = [];
 experiment.push(welcome_block);
-experiment.push(trial1_block);
-experiment.push(results_block);
-experiment.push(trial2_block);
-experiment.push(results_block);
-experiment.push(trial3_block);
-experiment.push(results_block);
-experiment.push(trial4_block);
-experiment.push(results_block);
-experiment.push(trial5_block);
-experiment.push(results_block);
-experiment.push(trial6_block);
-experiment.push(results_block);
-experiment.push(trial7_block);
-experiment.push(results_block);
-experiment.push(trial8_block);
-experiment.push(results_block);
+
+// Build stimuli and add to experiment
+var diptics = _.zip(_.shuffle(stim_ultra),_.shuffle(stim_average));
+var all_diptics = [];
+for (var i = 0; i < 4; i++) {
+  for (var j = 0; j < diptics.length; j++) {
+    var a_stim=i%2?diptics[j]:flip(diptics[j]);
+    all_diptics.push(a_stim);
+  }
+}
+var all_diptics_shuffled = _.shuffle(all_diptics);
+var answer = '';
+
+for (var i = 0; i < all_diptics_shuffled.length; i++) {
+  var dot_html = '';
+  if (averageOnRight(all_diptics_shuffled[i])){
+    dot_html = buildTable("","<span style='font-size:4em;'>&#9679;</span>");
+    answer = 'different';
+  } else {
+    dot_html = buildTable("<span style='font-size:4em;'>&#9679;</span>","");
+    answer = 'same';
+  }
+
+  var fixation_cross_block = {
+    type: 'single-stim',
+    stimuli: "<center><p style='font-size:6em; padding-top:150px;'>+</p></center>",
+    is_html:true,
+    timing_response: 500,
+    timing_post_trial: 0}
+
+  var a_trial_block = {
+    type:'same-different',
+    stimuli:[[buildTable("<img src='"+all_diptics_shuffled[i][0]+"'>",
+                                            "<img src='"+all_diptics_shuffled[i][1]+"'>"),
+                                            dot_html]],
+    answer:[answer],
+    same_key:67,
+    different_key:77,
+    is_html:true,
+    timing_first_stim:500,
+    timing_gap:5,
+    timing_second_stim:-1}
+    experiment.push(fixation_cross_block);
+    experiment.push(a_trial_block);
+    if((i+1)%40==0){ // show a results block every 40 trials
+      experiment.push(results_block);
+    }
+    
+}
 experiment.push(last_block);
-
-
 
 jsPsych.preloadImages(stimuli_images, function(){ startExperiment(); });
 

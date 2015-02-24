@@ -1,5 +1,5 @@
-var stim_average = ['Stimuli/eAverage1.jpg', 'Stimuli/eAverage2.jpg', 'Stimuli/eAverage3.jpg', 'Stimuli/eAverage4.jpg', 'Stimuli/eAverage5.jpg', 'Stimuli/eAverage6.jpg', 'Stimuli/eAverage7.jpg', 'Stimuli/eAverage8.jpg', 'Stimuli/eAverage9.jpg', 'Stimuli/eAverage10.jpg', 'Stimuli/eAverage11.jpg', 'Stimuli/eAverage12.jpg', 'Stimuli/eAverage13.jpg', 'Stimuli/eAverage14.jpg', 'Stimuli/eAverage15.jpg', 'Stimuli/eAverage16.jpg', 'Stimuli/eAverage17.jpg', 'Stimuli/eAverage18.jpg', 'Stimuli/eAverage19.jpg', 'Stimuli/eAverage20.jpg', 'Stimuli/eAverage21.jpg', 'Stimuli/eAverage22.jpg', 'Stimuli/eAverage23.jpg', 'Stimuli/eAverage24.jpg', 'Stimuli/eAverage25.jpg', 'Stimuli/eAverage26.jpg', 'Stimuli/eAverage27.jpeg', 'Stimuli/eAverage28.jpg', 'Stimuli/eAverage29.jpg', 'Stimuli/eAverage30.jpg', 'Stimuli/eAverage31.jpg', 'Stimuli/eAverage32.jpg', 'Stimuli/eAverage33.jpg', 'Stimuli/eAverage34.jpg', 'Stimuli/eAverage35.jpg', 'Stimuli/eAverage36.jpg', 'Stimuli/eAverage37.jpg', 'Stimuli/eAverage38.jpg', 'Stimuli/eAverage39.jpg', 'Stimuli/eAverage40.jpg', 'Stimuli/eAverage41.jpg', 'Stimuli/eAverage42.jpg', 'Stimuli/eAverage43.jpg', 'Stimuli/eAverage44.jpg', 'Stimuli/eAverage45.jpg', 'Stimuli/eAverage46.jpg', 'Stimuli/eAverage47.jpg', 'Stimuli/eAverage48.jpg', 'Stimuli/eAverage49.jpg', 'Stimuli/eAverage50.jpg', 'Stimuli/eAverage51.jpg', 'Stimuli/eAverage52.jpg', 'Stimuli/eAverage53.jpg', 'Stimuli/eAverage54.jpg', 'Stimuli/eAverage55.jpg', 'Stimuli/eAverage56.jpg', 'Stimuli/eAverage57.jpg', 'Stimuli/eAverage58.jpg', 'Stimuli/eAverage59.jpg', 'Stimuli/eAverage60.jpg', 'Stimuli/eAverage61.jpg', 'Stimuli/eAverage62.jpg', 'Stimuli/eAverage63.jpg', 'Stimuli/eAverage64.jpg', 'Stimuli/eAverage65.jpg', 'Stimuli/eAverage66.jpg', 'Stimuli/eAverage67.jpg', 'Stimuli/eAverage68.jpg', 'Stimuli/eAverage69.jpg', 'Stimuli/eAverage70.jpg', 'Stimuli/eAverage71.jpg', 'Stimuli/eAverage72.jpg', 'Stimuli/eAverage73.jpg', 'Stimuli/eAverage74.jpg', 'Stimuli/eAverage75.jpg', 'Stimuli/eAverage76.jpg', 'Stimuli/eAverage77.jpg', 'Stimuli/eAverage78.jpg', 'Stimuli/eAverage79.jpg', 'Stimuli/eAverage80.jpg'];
-var stim_ultra = ['Stimuli/eUltraT1.jpg', 'Stimuli/eUltraT2.jpg', 'Stimuli/eUltraT3.jpg', 'Stimuli/eUltraT4.jpg', 'Stimuli/eUltraT5.jpg', 'Stimuli/eUltraT6.jpg', 'Stimuli/eUltraT7.jpg', 'Stimuli/eUltraT8.jpg', 'Stimuli/eUltraT9.jpg', 'Stimuli/eUltraT10.jpg', 'Stimuli/eUltraT11.jpg', 'Stimuli/eUltraT12.jpg', 'Stimuli/eUltraT13.jpg', 'Stimuli/eUltraT14.jpg', 'Stimuli/eUltraT15.jpg', 'Stimuli/eUltraT16.jpg', 'Stimuli/eUltraT17.jpg', 'Stimuli/eUltraT18.jpg', 'Stimuli/eUltraT19.jpg', 'Stimuli/eUltraT20.jpg', 'Stimuli/eUltraT21.jpg', 'Stimuli/eUltraT22.jpg', 'Stimuli/eUltraT23.jpg', 'Stimuli/eUltraT24.jpg', 'Stimuli/eUltraT25.jpg', 'Stimuli/eUltraT26.jpg', 'Stimuli/eUltraT27.jpg', 'Stimuli/eUltraT28.jpg', 'Stimuli/eUltraT29.jpg', 'Stimuli/eUltraT30.JPG', 'Stimuli/eUltraT31.jpg', 'Stimuli/eUltraT32.jpg', 'Stimuli/eUltraT33.jpg', 'Stimuli/eUltraT34.jpg', 'Stimuli/eUltraT35.jpg', 'Stimuli/eUltraT36.jpg', 'Stimuli/eUltraT37.jpg', 'Stimuli/eUltraT38.jpg', 'Stimuli/eUltraT39.jpg', 'Stimuli/eUltraT40.jpg', 'Stimuli/eUltraT41.jpg', 'Stimuli/eUltraT42.jpg', 'Stimuli/eUltraT43.jpg', 'Stimuli/eUltraT44.jpeg', 'Stimuli/eUltraT45.jpg', 'Stimuli/eUltraT46.jpg', 'Stimuli/eUltraT47.jpg', 'Stimuli/eUltraT48.jpg', 'Stimuli/eUltraT49.jpg', 'Stimuli/eUltraT50.jpg', 'Stimuli/eUltraT51.jpg', 'Stimuli/eUltraT52.jpg', 'Stimuli/eUltraT53.jpg', 'Stimuli/eUltraT54.jpg', 'Stimuli/eUltraT55.jpg', 'Stimuli/eUltraT56.jpg', 'Stimuli/eUltraT57.jpg', 'Stimuli/eUltraT58.jpg', 'Stimuli/eUltraT59.jpg', 'Stimuli/eUltraT60.jpg', 'Stimuli/eUltraT61.jpg', 'Stimuli/eUltraT62.jpg', 'Stimuli/eUltraT63.jpg', 'Stimuli/eUltraT64.jpg', 'Stimuli/eUltraT65.jpg', 'Stimuli/eUltraT66.jpg', 'Stimuli/eUltraT67.jpg', 'Stimuli/eUltraT68.jpg', 'Stimuli/eUltraT69.jpg', 'Stimuli/eUltraT70.jpg', 'Stimuli/eUltraT71.jpg', 'Stimuli/eUltraT72.jpg', 'Stimuli/eUltraT73.jpg', 'Stimuli/eUltraT74.jpg', 'Stimuli/eUltraT75.jpg', 'Stimuli/eUltraT76.jpg', 'Stimuli/eUltraT77.jpg', 'Stimuli/eUltraT78.jpg', 'Stimuli/eUltraT79.jpg', 'Stimuli/eUltraT80.jpg'];
+var stim_average = ['Stimuli/vAverage1.jpg','Stimuli/vAverage2.jpg','Stimuli/vAverage3.jpg','Stimuli/vAverage4.jpg','Stimuli/vAverage5.jpg','Stimuli/vAverage6.jpg','Stimuli/vAverage7.jpg','Stimuli/vAverage8.jpg','Stimuli/vAverage9.jpg','Stimuli/vAverage10.jpg','Stimuli/vAverage11.jpg','Stimuli/vAverage12.jpg','Stimuli/vAverage13.jpg','Stimuli/vAverage14.jpg','Stimuli/vAverage15.jpg','Stimuli/vAverage16.jpg','Stimuli/vAverage17.jpg','Stimuli/vAverage18.jpg','Stimuli/vAverage19.jpg','Stimuli/vAverage20.jpg','Stimuli/vAverage21.jpg','Stimuli/vAverage22.jpg','Stimuli/vAverage23.jpg','Stimuli/vAverage24.jpg','Stimuli/vAverage25.jpg','Stimuli/vAverage26.jpg','Stimuli/vAverage27.jpg','Stimuli/vAverage28.jpg','Stimuli/vAverage29.jpg','Stimuli/vAverage30.jpg','Stimuli/vAverage31.jpg','Stimuli/vAverage32.jpg','Stimuli/vAverage33.jpg','Stimuli/vAverage34.jpg','Stimuli/vAverage35.jpg','Stimuli/vAverage36.jpg','Stimuli/vAverage37.jpg','Stimuli/vAverage38.jpg','Stimuli/vAverage39.jpg','Stimuli/vAverage40.jpg','Stimuli/vAverage41.jpg','Stimuli/vAverage42.jpg','Stimuli/vAverage43.jpg','Stimuli/vAverage44.jpg','Stimuli/vAverage45.jpg','Stimuli/vAverage46.jpg','Stimuli/vAverage47.jpg','Stimuli/vAverage48.jpg','Stimuli/vAverage49.jpg','Stimuli/vAverage50.jpg','Stimuli/vAverage51.jpg','Stimuli/vAverage52.jpg','Stimuli/vAverage53.jpg','Stimuli/vAverage54.jpg','Stimuli/vAverage55.jpg','Stimuli/vAverage56.jpg','Stimuli/vAverage57.jpg','Stimuli/vAverage58.jpg','Stimuli/vAverage59.jpg','Stimuli/vAverage60.jpg','Stimuli/vAverage61.jpg','Stimuli/vAverage62.jpg','Stimuli/vAverage63.jpg','Stimuli/vAverage64.jpg','Stimuli/vAverage65.jpg','Stimuli/vAverage66.jpg','Stimuli/vAverage67.jpg','Stimuli/vAverage68.jpg','Stimuli/vAverage69.jpeg','Stimuli/vAverage70.jpg','Stimuli/vAverage71.jpg','Stimuli/vAverage72.jpg','Stimuli/vAverage73.jpg','Stimuli/vAverage74.jpg','Stimuli/vAverage75.jpg','Stimuli/vAverage76.jpg','Stimuli/vAverage77.jpg','Stimuli/vAverage78.jpg','Stimuli/vAverage79.jpg','Stimuli/vAverage80.JPG'];
+var stim_ultra = ['Stimuli/vUltraT1.jpg', 'Stimuli/vUltraT2.jpg', 'Stimuli/vUltraT3.jpg', 'Stimuli/vUltraT4.jpg', 'Stimuli/vUltraT5.jpg', 'Stimuli/vUltraT6.jpg', 'Stimuli/vUltraT7.jpg', 'Stimuli/vUltraT8.jpg', 'Stimuli/vUltraT9.jpg', 'Stimuli/vUltraT10.jpg', 'Stimuli/vUltraT11.jpg', 'Stimuli/vUltraT12.jpg', 'Stimuli/vUltraT13.jpg', 'Stimuli/vUltraT14.jpg', 'Stimuli/vUltraT15.jpg', 'Stimuli/vUltraT16.jpg', 'Stimuli/vUltraT17.jpg', 'Stimuli/vUltraT18.jpg', 'Stimuli/vUltraT19.jpg', 'Stimuli/vUltraT20.jpg', 'Stimuli/vUltraT21.jpg', 'Stimuli/vUltraT22.jpg', 'Stimuli/vUltraT23.jpg', 'Stimuli/vUltraT24.jpg', 'Stimuli/vUltraT25.jpg', 'Stimuli/vUltraT26.jpg', 'Stimuli/vUltraT27.jpg', 'Stimuli/vUltraT28.jpg', 'Stimuli/vUltraT29.jpg', 'Stimuli/vUltraT30.jpg', 'Stimuli/vUltraT31.jpg', 'Stimuli/vUltraT32.jpg', 'Stimuli/vUltraT33.jpg', 'Stimuli/vUltraT34.jpg', 'Stimuli/vUltraT35.jpg', 'Stimuli/vUltraT36.jpeg', 'Stimuli/vUltraT37.jpg', 'Stimuli/vUltraT38.jpg', 'Stimuli/vUltraT39.jpg', 'Stimuli/vUltraT40.jpg', 'Stimuli/vUltraT41.jpg', 'Stimuli/vUltraT42.jpg', 'Stimuli/vUltraT43.jpg', 'Stimuli/vUltraT44.jpg', 'Stimuli/vUltraT45.jpg', 'Stimuli/vUltraT46.jpg', 'Stimuli/vUltraT47.jpg', 'Stimuli/vUltraT48.jpg', 'Stimuli/vUltraT49.jpg', 'Stimuli/vUltraT50.jpg', 'Stimuli/vUltraT51.jpg', 'Stimuli/vUltraT52.jpg', 'Stimuli/vUltraT53.jpg', 'Stimuli/vUltraT54.jpg', 'Stimuli/vUltraT55.jpg', 'Stimuli/vUltraT56.jpg', 'Stimuli/vUltraT57.jpg', 'Stimuli/vUltraT58.jpg', 'Stimuli/vUltraT59.jpg', 'Stimuli/vUltraT60.JPG', 'Stimuli/vUltraT61.jpg', 'Stimuli/vUltraT62.jpg', 'Stimuli/vUltraT63.jpg', 'Stimuli/vUltraT64.jpg', 'Stimuli/vUltraT65.jpg', 'Stimuli/vUltraT66.jpg', 'Stimuli/vUltraT67.jpg', 'Stimuli/vUltraT68.jpg', 'Stimuli/vUltraT69.jpg', 'Stimuli/vUltraT70.jpg', 'Stimuli/vUltraT71.jpg', 'Stimuli/vUltraT72.jpg', 'Stimuli/vUltraT73.jpg', 'Stimuli/vUltraT74.jpg', 'Stimuli/vUltraT75.jpg', 'Stimuli/vUltraT76.jpg', 'Stimuli/vUltraT77.jpg', 'Stimuli/vUltraT78.jpg', 'Stimuli/vUltraT79.jpg', 'Stimuli/vUltraT80.jpg'];
 var RESULTS = [];
 var ALL_RESULTS = [];
 
@@ -22,7 +22,7 @@ function getCoord(){
 
 function getScore(){
   return {
-    simple : _.filter(RESULTS,function(r){return r.correct;}).length+'/'+RESULTS.length,
+    num_correct : _.filter(RESULTS,function(r){return r.correct;}).length,
     percent : Math.floor(100*_.filter(RESULTS,function(r){return r.correct;}).length/RESULTS.length)+'%'
   }
 }
@@ -65,13 +65,18 @@ function matrix_to_html(matrix){
 }
 var now = Date.now();
 
-$('body').html('<h1>Instructions</h1><p>Click the average sized model. Click <a href="#" id="skippy">here</a> to continue.</p>');
+$('body').html("<h2>Instructions</h2> <p>During this game, you will see a grid of 16 photographs of models. It is your job to click on the image of the average weight woman as quickly as you can. This is a tough task! She will be surrounded by ultra-thin women.</p><p>Do your best to respond as quickly and accurately as possible.</p>Click <a href='#' id='skippy'>here</a> to continue.</p>");
 
 function skipOnKey(){
   $('#skippy').on('click', function(){
-    $('body').html(matrix_to_html(buildImageMatrix(stim_ultra,stim_average)));
-    now = Date.now();
-    nextTrialArray();
+
+    $('body').html("<table height=600><tr><td></td><td></td><td></td></tr><tr><td></td><td><center><strong style='font-size:5em;color:#000;'>+</strong></center></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>");
+    
+    setTimeout(function(){
+      $('body').html(matrix_to_html(buildImageMatrix(stim_ultra,stim_average)));
+      now = Date.now();
+      nextTrialArray();
+    }, 500);
   });
 }
 skipOnKey();
@@ -91,25 +96,27 @@ function nextTrialArray(){
       $correct_el.parent().addClass('correct');
       $correct_el.addClass('animated wobble');
     }
-
+    
     setTimeout(function(){
-      // Hide everything 2 seconds after the click
-      $('body').html('');
+      $('body').html("<table height=600><tr><td></td><td></td><td></td></tr><tr><td></td><td><center><strong style='font-size:5em;color:#000;'>+</strong></center></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>");
       TRIAL_COUNT++;
-    }, 2000);
+    }, 1000);
 
     setTimeout(function(){
       if(TRIALS_PER_BLOCK*BLOCK_NUM==TRIAL_COUNT){
           // Last trial scores and ALL scores.
-          $('body').html(function(){return "<h1>Results</h1><p><ul><li>Percentage Correct: "+
-            getScore().percent+"</li><li>Score: "+
-            getScore().simple+"</li><li>"+
-            getAverageRT()+"</li></ul></p> <h1>This concludes all the trials.</h1> ";});
+          $('body').html(function(){var score = getScore();
+        return "<p>Great work! These are your totals for the game:</p><ul><li><strong># correct</strong> <span style='color:red;'>"+
+        score.num_correct+"</span></li><li><strong>% correct</strong> <span style='color:red;'>"+
+        score.percent+"</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
+        getAverageRT()+"</span></li></ul> <p>Congratulations on finishing Module 5!</p>";});
       }else if(TRIAL_COUNT/TRIALS_PER_BLOCK==1){
-        $('body').html(function(){return "<h1>Results</h1><p><ul><li>Percentage Correct: "+
-          getScore().percent+"</li><li>Score: "+
-          getScore().simple+"</li><li>"+
-          getAverageRT()+"</li></ul>Click <a href='#' id='skippy'>here</a> to continue.</p>";});
+        $('body').html(function(){
+          var score = getScore();
+          return "<p>Let's take a look at how you're doing:</p><ul><li><strong># correct</strong> <span style='color:red;'>"+
+        score.num_correct+"</span></li><li><strong>% correct</strong> <span style='color:red;'>"+
+        score.percent+"</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
+        getAverageRT()+"</span></li></ul> <p>Nice job! Let's see if you can respond even faster this time around!</p><p>Click <a href='#' id='skippy'>here</a> to continue.</p>";});
         skipOnKey();
         now = Date.now();
         nextTrialArray();
@@ -118,7 +125,7 @@ function nextTrialArray(){
         now = Date.now();
         nextTrialArray();
       }
-    }, 2500);
+    }, 1500);
   });
 }
 
