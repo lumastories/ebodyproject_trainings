@@ -11,7 +11,7 @@ var TRIAL_COUNT = 0;
 
 function getCoord(){
   var x = Math.floor(Math.random()*10)%MATRIX_X_SIZE;
-  var y = Math.floor(Math.random()*10)%MATRIX_X_SIZE;
+  var y = Math.floor(Math.random()*10)%MATRIX_Y_SIZE;
 
   return {
           id:'#'+x+y,
