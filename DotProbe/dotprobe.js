@@ -1,4 +1,4 @@
-// Each of the 80 average-weight women images will be randomly paired with one of
+// Each of the 80 average-weight women images will be randomly paipurple with one of
 // the 80 ultra-thin women images (side by side) for 500 ms.  Immediately
 // Immediately after the images disappear, a small dot probe appears in the
 // location of one of the images.  The probe appears in the location occupied by an
@@ -39,7 +39,9 @@ function getPercentCorrect(){
 }
 
 function getTotalCorrect(){
-  return 12; // TODO
+  var trial_data = jsPsych.data.getTrialsOfType('same-different');
+  var num_correct = _.filter(trial_data,function(el){return el.correct}).length
+  return num_correct+'/'+trial_data.length
 }
 
 function buildTable(left,right){
@@ -71,7 +73,7 @@ function flip(arr){
 // BLOCKS
 var welcome_block = {
   type:"text",
-  text:"<h3>Instructions:</h3> <p>In this game, you will see two pictures on the screen. The pictures will disappear and a dot will replace one of the two photos. </p> <p>Your job is to press the \"c\" if the dot appears behind the left photograph was or \"m\" if the dot appears behind the right photograph.</p> <p>Do your best to respond as quickly and accurately as possible.</p><p>Press any key to begin</p>",
+  text:"<h3>Instructions</h3> <p>In this game, you will see two pictures on the screen. The pictures will disappear and a dot will replace one of the two photos. </p> <p>Your job is to press the \"c\" if the dot appears behind the left photograph or \"m\" if the dot appears behind the right photograph.</p> <p>Do your best to respond as quickly and accurately as possible.</p><p>Press any key to begin</p>",
   is_html:true
 }
 
@@ -79,10 +81,10 @@ var results_block = {
     type:"text",
     text:function(){
 
-      return "<p>Let's take a look at how you're doing:</p> <ul> <li><strong># correct</strong> <span style='color:red;'>"+
-      getTotalCorrect()+"</span></li> <li><strong>% correct</strong> <span style='color:red;'>"+
-      getPercentCorrect()+"%</span></li> <li><strong>Average RT</strong> <span style='color:red;'>"+
-      getAverageResponseTime()+"</span></li> </ul> <p>Nice job!  Let's see if you can respond even faster this time around!</p><p>Press any key to continue</p>";
+      return "<p>Let's take a look at how you're doing:</p> <ul> <li><strong># correct</strong> <span style='color:purple;'>"+
+      getTotalCorrect()+"</span></li> <li><strong>% correct</strong> <span style='color:purple;'>"+
+      getPercentCorrect()+"%</span></li> <li><strong>Average RT</strong> <span style='color:purple;'>"+
+      getAverageResponseTime()+"ms</span></li> </ul> <p>Nice job!  Let's see if you can respond even faster this time around!</p><p>Press any key to continue</p>";
     },
     is_html:true
 }
@@ -91,9 +93,9 @@ var last_block = {
     type:"text",
     text:function(){
 
-      return "<p>Great work! These are your totals for the game:</p> <ul> <li><strong># correct</strong> <span style='color:red;'>"+
-      getTotalCorrect()+"</span></li> <li><strong>% correct</strong> <span style='color:red;'>"+
-      getPercentCorrect()+"%</span></li> <li><strong>Average RT</strong> <span style='color:red;'>"+
+      return "<p>Great work! These are your totals for the game:</p> <ul> <li><strong># correct</strong> <span style='color:purple;'>"+
+      getTotalCorrect()+"</span></li> <li><strong>% correct</strong> <span style='color:purple;'>"+
+      getPercentCorrect()+"%</span></li> <li><strong>Average RT</strong> <span style='color:purple;'>"+
       getAverageResponseTime()+"</span></li> </ul> <p>Congratulations on finishing Module 3!</p>";
     },
     is_html:true
@@ -147,7 +149,7 @@ for (var i = 0; i < all_diptics_shuffled.length; i++) {
     if((i+1)%40==0){ // show a results block every 40 trials
       experiment.push(results_block);
     }
-    
+
 }
 experiment.push(last_block);
 
