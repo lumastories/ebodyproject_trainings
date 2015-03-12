@@ -55,17 +55,17 @@ function getNumberCorrect(){
 
 function getNumberGo(){
   var trial_data = jsPsych.data.getTrialsOfType('single-stim');
-  return _.filter(trial_data, function(td){return td.go }).length; 
+  return _.filter(trial_data, function(td){return td.go }).length;
 }
 
 function getNumberNoGo(){
   var trial_data = jsPsych.data.getTrialsOfType('single-stim');
-  return _.filter(trial_data, function(td){return !td.go }).length; 
+  return _.filter(trial_data, function(td){return !td.go }).length;
 }
 
 function getNumberWrongSide(){
   var trial_data = jsPsych.data.getTrialsOfType('single-stim');
-  return _.filter(trial_data, function(td){return td.key_press>-1&&td.go&&(td.correct_key!=td.key_press)}).length; 
+  return _.filter(trial_data, function(td){return td.key_press>-1&&td.go&&(td.correct_key!=td.key_press)}).length;
 }
 
 function getPercentCorrect(){
@@ -76,7 +76,7 @@ function getPercentCorrect(){
 // BLOCKS
 var welcome_block = {
   type:"text",
-  text:"<h2>Instructions</h2><p>During this game, you will see a series of pictures on the screen surrounded by a solid or a dashed border.</p><p>Your job is to press \"c\" if the image is on the left side of the screen and \"m\" if the image is on the right side of the screen.</p><p>Only press if there is a solid bar around the image!  If you see a dashed bar, do nothing and the next photo will appear shorty! </p><p>Do your best to respond as quickly and accurately as possible.</p>",
+  text:"<h2>Instructions</h2><p>During this game, you will see a series of pictures on the screen surrounded by a solid or a dashed border.</p><p>Your job is to press \"c\" if the image is on the left side of the screen and \"m\" if the image is on the right side of the screen.</p><p>Only press if there is a solid bar around the image!  If you see a dashed bar, do nothing and the next photo will appear shorty! </p><p>Do your best to respond as quickly and accurately as possible. Press any key to begin.</p>",
   is_html:true
 }
 
@@ -134,16 +134,16 @@ for (var j = 0; j < 6; j++) {
   };
 
   var score_block = {
-    
+
       type:"text",
       text: function(){
         var percent_correct=getPercentCorrect();
         var avergage_rt=getAverageResponseTime();
         var number_correct=getNumberCorrect();
-        return "<p>Let's take a look at how you're doing:</p><ul><li><strong># correct</strong> <span style='color:red;'>"+
-        number_correct+"</span></li><li><strong>% correct</strong> <span style='color:red;'>"+
-        percent_correct+"</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
-        avergage_rt+"</span></li></ul><p>Nice job! Let's see if you can respond even faster this time around!</p>";},
+        return "<p>Let's take a look at how you're doing:</p><ul><li><strong># correct</strong> <span style='color:purple;'>"+
+        number_correct+"</span></li><li><strong>% correct</strong> <span style='color:purple;'>"+
+        percent_correct+"</span></li><li><strong>Average RT</strong> <span style='color:purple;'>"+
+        avergage_rt+"ms</span></li></ul><p>Nice job! Let's see if you can respond even faster this time around! Press any key to continue.</p>";},
       is_html:true
   }
   experiment.push(score_block);
@@ -159,7 +159,7 @@ var last_block = {
       return "<p>Great work! These are your totals for the game:</p><ul><li><strong># correct</strong> "+
       number_correct+"</li><li><strong>% correct</strong> "+
       percent_correct+"</li><li><strong>Average RT</strong> "+
-      average_rt+"</li></ul><p>Congratulations on finishing Module 2!</p>";},
+      average_rt+"ms</li></ul><p>Congratulations on finishing Module 2!</p>";},
     is_html:true
   }
 experiment.push(last_block);

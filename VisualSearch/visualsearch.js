@@ -3,8 +3,8 @@ var stim_ultra = ['Stimuli/vUltraT1.jpg', 'Stimuli/vUltraT2.jpg', 'Stimuli/vUltr
 var RESULTS = [];
 var ALL_RESULTS = [];
 
-var MATRIX_X_SIZE = 4;
-var MATRIX_Y_SIZE = 4;
+var MATRIX_X_SIZE = 3; // across
+var MATRIX_Y_SIZE = 5; // width
 var TRIALS_PER_BLOCK = 30;
 var BLOCK_NUM = 4;
 var TRIAL_COUNT = 0;
@@ -51,13 +51,13 @@ function buildImageMatrix(incorrect, correct){
 }
 
 function matrix_to_html(matrix){
-  
+
   var html = "<table>";
   for (var i = 0; i < MATRIX_X_SIZE; i++) {
     html += '<tr>';
     for (var j = 0; j < MATRIX_Y_SIZE; j++) {
       html+="<td><img src='"+matrix[i][j]+"'></td>";
-    } 
+    }
     html += '</tr>';
   }
   html+="</table>";
@@ -71,7 +71,7 @@ function skipOnKey(){
   $('#skippy').on('click', function(){
 
     $('body').html("<table height=600><tr><td></td><td></td><td></td></tr><tr><td></td><td><center><strong style='font-size:5em;color:#000;'>+</strong></center></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>");
-    
+
     setTimeout(function(){
       $('body').html(matrix_to_html(buildImageMatrix(stim_ultra,stim_average)));
       now = Date.now();
@@ -80,7 +80,7 @@ function skipOnKey(){
   });
 }
 skipOnKey();
-function nextTrialArray(){ 
+function nextTrialArray(){
   $('img').on('click', function(){
     $el = $(this);
     if(String($el.attr('src')).slice(9,10)=='A'){
@@ -96,7 +96,7 @@ function nextTrialArray(){
       $correct_el.parent().addClass('correct');
       $correct_el.addClass('animated wobble');
     }
-    
+
     setTimeout(function(){
       $('body').html("<table height=600><tr><td></td><td></td><td></td></tr><tr><td></td><td><center><strong style='font-size:5em;color:#000;'>+</strong></center></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>");
       TRIAL_COUNT++;

@@ -96,7 +96,7 @@ var last_block = {
       return "<p>Great work! These are your totals for the game:</p> <ul> <li><strong># correct</strong> <span style='color:purple;'>"+
       getTotalCorrect()+"</span></li> <li><strong>% correct</strong> <span style='color:purple;'>"+
       getPercentCorrect()+"%</span></li> <li><strong>Average RT</strong> <span style='color:purple;'>"+
-      getAverageResponseTime()+"</span></li> </ul> <p>Congratulations on finishing Module 3!</p>";
+      getAverageResponseTime()+"ms</span></li> </ul> <p>Congratulations on finishing Module 3!</p>";
     },
     is_html:true
 }
@@ -104,7 +104,7 @@ var experiment = [];
 experiment.push(welcome_block);
 
 // Build stimuli and add to experiment
-var diptics = _.zip(_.shuffle(stim_ultra),_.shuffle(stim_average));
+var diptics = _.shuffle(_.zip(_.shuffle(stim_ultra),_.shuffle(stim_average)));
 var all_diptics = [];
 for (var i = 0; i < 4; i++) {
   for (var j = 0; j < diptics.length; j++) {
@@ -112,47 +112,55 @@ for (var i = 0; i < 4; i++) {
     all_diptics.push(a_stim);
   }
 }
-var all_diptics_shuffled = _.shuffle(all_diptics);
+
+var diptic_blocks = [ all_diptics.slice(0,40),
+                      all_diptics.slice(40,80),
+                      all_diptics.slice(80,120),
+                      all_diptics.slice(120,160),
+                      all_diptics.slice(160,200),
+                      all_diptics.slice(200,240),
+                      all_diptics.slice(240,280),
+                      all_diptics.slice(280,320) ]
 var answer = '';
-
-for (var i = 0; i < all_diptics_shuffled.length; i++) {
-  var dot_html = '';
-  if (averageOnRight(all_diptics_shuffled[i])){
-    dot_html = buildTable("","<span style='font-size:4em;'>&#9679;</span>");
-    answer = 'different';
-  } else {
-    dot_html = buildTable("<span style='font-size:4em;'>&#9679;</span>","");
-    answer = 'same';
-  }
-
-  var fixation_cross_block = {
-    type: 'single-stim',
-    stimuli: "<center><p style='font-size:6em; padding-top:150px;'>+</p></center>",
-    is_html:true,
-    timing_response: 500,
-    timing_post_trial: 0}
-
-  var a_trial_block = {
-    type:'same-different',
-    stimuli:[[buildTable("<img src='"+all_diptics_shuffled[i][0]+"'>",
-                                            "<img src='"+all_diptics_shuffled[i][1]+"'>"),
-                                            dot_html]],
-    answer:[answer],
-    same_key:67,
-    different_key:77,
-    is_html:true,
-    timing_first_stim:500,
-    timing_gap:5,
-    timing_second_stim:-1}
-    experiment.push(fixation_cross_block);
-    experiment.push(a_trial_block);
-    if((i+1)%40==0){ // show a results block every 40 trials
-      experiment.push(results_block);
+for (var k = 0; k < diptic_blocks.length; k++) {
+  for (var i = 0; i < diptic_blocks[k].length; i++) {
+    var dot_html = '';
+    if (averageOnRight(diptic_blocks[k][i])){
+      dot_html = buildTable("","<span style='font-size:4em;'>&#9679;</span>");
+      answer = 'different';
+    } else {
+      dot_html = buildTable("<span style='font-size:4em;'>&#9679;</span>","");
+      answer = 'same';
     }
 
-}
-experiment.push(last_block);
+    var fixation_cross_block = {
+      type: 'single-stim',
+      stimuli: "<center><p style='font-size:6em; padding-top:150px;'>&nbsp;+</p></center>",
+      is_html:true,
+      timing_response: 500,
+      timing_post_trial: 0}
 
+    var a_trial_block = {
+      type:'same-different',
+      stimuli:[[buildTable("<img src='"+diptic_blocks[k][i][0]+"'>",
+                                              "<img src='"+diptic_blocks[k][i][1]+"'>"),
+                                              dot_html]],
+      answer:[answer],
+      same_key:67,
+      different_key:77,
+      is_html:true,
+      timing_first_stim:500,
+      timing_gap:5,
+      timing_second_stim:-1}
+
+    experiment.push(fixation_cross_block);
+    experiment.push(a_trial_block);
+  }
+  experiment.push(results_block);
+}
+
+
+experiment.push(last_block);
 jsPsych.preloadImages(stimuli_images, function(){ startExperiment(); });
 
 function startExperiment(){
