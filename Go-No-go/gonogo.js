@@ -140,8 +140,9 @@ for (var j = 0; j < 6; j++) {
         var percent_correct=getPercentCorrect();
         var avergage_rt=getAverageResponseTime();
         var number_correct=getNumberCorrect();
+        var total_go = getNumberGo();
         return "<p>Let's take a look at how you're doing:</p><ul><li><strong># correct</strong> <span style='color:purple;'>"+
-        number_correct+"</span></li><li><strong>% correct</strong> <span style='color:purple;'>"+
+        number_correct+"/"+total_go+"</span></li><li><strong>% correct</strong> <span style='color:purple;'>"+
         percent_correct+"</span></li><li><strong>Average RT</strong> <span style='color:purple;'>"+
         avergage_rt+"ms</span></li></ul><p>Nice job! Let's see if you can respond even faster this time around! Press any key to continue.</p>";},
       is_html:true
@@ -156,8 +157,9 @@ var last_block = {
       var percent_correct=getPercentCorrect();
       var avergage_rt=getAverageResponseTime();
       var number_correct=getNumberCorrect();
+      var total_go = getNumberGo();
       return "<p>Great work! These are your totals for the game:</p><ul><li><strong># correct</strong> "+
-      number_correct+"</li><li><strong>% correct</strong> "+
+      number_correct+"/"+total_go+"</li><li><strong>% correct</strong> "+
       percent_correct+"</li><li><strong>Average RT</strong> "+
       average_rt+"ms</li></ul><p>Congratulations on finishing Module 2!</p>";},
     is_html:true
