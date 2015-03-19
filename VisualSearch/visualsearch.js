@@ -9,6 +9,30 @@ var TRIALS_PER_BLOCK = 30;
 var BLOCK_NUM = 4;
 var TRIAL_COUNT = 0;
 
+
+var all_trials = get_all_trials_array(stim_average,stim_ultra)
+
+// call this 4 times and concat.
+function get_all_trials_array(average,ultra){
+  /*
+    input: 2 arrays of correct and incorrect stimuli
+    output: an array of 30 html tables
+    criteria:
+              - no repeats within a block (30 images)
+              - each table should have 1 correct images
+  */
+  var html_tables = [];
+  for (var k = 0; k < BLOCK_NUM; k++) {
+    var averages = _.sample(average, TRIALS_PER_BLOCK); // get 30 averages
+    for (var i = 0; i < averages.length; i++) {
+      var ultras = _.sample(ultra,(MATRIX_X_SIZE*MATRIX_Y_SIZE));
+      averages[i]
+      html_tables.push(matrix_to_html(buildImageMatrix(ultras, averages[i])));
+    }
+  }
+  return html_tables;
+}
+
 function getCoord(){
   var x = Math.floor(Math.random()*10)%MATRIX_X_SIZE;
   var y = Math.floor(Math.random()*10)%MATRIX_Y_SIZE;
@@ -22,7 +46,7 @@ function getCoord(){
 
 function getScore(){
   return {
-    num_correct : _.filter(RESULTS,function(r){return r.correct;}).length,
+    num_correct : _.filter(RESULTS,function(r){return r.correct;}).length+'/'+RESULTS.length,
     percent : Math.floor(100*_.filter(RESULTS,function(r){return r.correct;}).length/RESULTS.length)+'%'
   }
 }
@@ -37,7 +61,6 @@ function getAverageRT(){
 
 function buildImageMatrix(incorrect, correct){
   var matrix = [];
-  var c = _.sample(correct);
   var inc = _.shuffle(incorrect);
   for (var i = 0; i < MATRIX_X_SIZE; i++) {
     matrix[i] = new Array();
@@ -46,12 +69,11 @@ function buildImageMatrix(incorrect, correct){
     }
   }
   correct_coords = [getCoord().x, getCoord().y]
-  matrix[correct_coords[0]][correct_coords[1]] = c;
+  matrix[correct_coords[0]][correct_coords[1]] = correct;
   return matrix;
 }
 
 function matrix_to_html(matrix){
-
   var html = "<table>";
   for (var i = 0; i < MATRIX_X_SIZE; i++) {
     html += '<tr>';
@@ -65,7 +87,7 @@ function matrix_to_html(matrix){
 }
 var now = Date.now();
 
-$('body').html("<h2>Instructions</h2> <p>During this game, you will see a grid of 16 photographs of models. It is your job to click on the image of the average weight woman as quickly as you can. This is a tough task! She will be surrounded by ultra-thin women.</p><p>Do your best to respond as quickly and accurately as possible.</p>Click <a href='#' id='skippy'>here</a> to continue.</p>");
+$('body').html("<div style='width:600px;margin:0 auto;'><h2>Instructions</h2> <p>During this game, you will see a grid of 16 photographs of models. It is your job to click on the image of the average weight woman as quickly as you can. This is a tough task! She will be surrounded by ultra-thin women.</p><p>Do your best to respond as quickly and accurately as possible.</p>Click <a href='#' id='skippy'>here</a> to continue.</p></div>");
 
 function skipOnKey(){
   $('#skippy').on('click', function(){
@@ -73,7 +95,10 @@ function skipOnKey(){
     $('body').html("<table height=600><tr><td></td><td></td><td></td></tr><tr><td></td><td><center><strong style='font-size:5em;color:#000;'>+</strong></center></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>");
 
     setTimeout(function(){
-      $('body').html(matrix_to_html(buildImageMatrix(stim_ultra,stim_average)));
+      // CHANGE THIS
+      console.log(TRIAL_COUNT);
+      console.log(all_trials);
+      $('body').html(all_trials[TRIAL_COUNT]);
       now = Date.now();
       nextTrialArray();
     }, 500);
@@ -82,6 +107,7 @@ function skipOnKey(){
 skipOnKey();
 function nextTrialArray(){
   $('img').on('click', function(){
+    $('img').unbind('click');
     $el = $(this);
     if(String($el.attr('src')).slice(9,10)=='A'){
       $el.parent().addClass('correct');
@@ -108,20 +134,22 @@ function nextTrialArray(){
           $('body').html(function(){var score = getScore();
         return "<p>Great work! These are your totals for the game:</p><ul><li><strong># correct</strong> <span style='color:red;'>"+
         score.num_correct+"</span></li><li><strong>% correct</strong> <span style='color:red;'>"+
-        score.percent+"</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
-        getAverageRT()+"</span></li></ul> <p>Congratulations on finishing Module 5!</p>";});
+        score.percent+"%</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
+        getAverageRT()+"ms</span></li></ul> <p>Congratulations on finishing Module 5!</p>";});
       }else if(TRIAL_COUNT/TRIALS_PER_BLOCK==1){
         $('body').html(function(){
           var score = getScore();
           return "<p>Let's take a look at how you're doing:</p><ul><li><strong># correct</strong> <span style='color:red;'>"+
         score.num_correct+"</span></li><li><strong>% correct</strong> <span style='color:red;'>"+
-        score.percent+"</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
-        getAverageRT()+"</span></li></ul> <p>Nice job! Let's see if you can respond even faster this time around!</p><p>Click <a href='#' id='skippy'>here</a> to continue.</p>";});
+        score.percent+"%</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
+        getAverageRT()+"ms</span></li></ul> <p>Nice job! Let's see if you can respond even faster this time around!</p><p>Click <a href='#' id='skippy'>here</a> to continue.</p>";});
         skipOnKey();
         now = Date.now();
         nextTrialArray();
       }else{
-        $('body').html(matrix_to_html(buildImageMatrix(stim_ultra,stim_average)));
+        // TODO, change this to array access
+        console.log(TRIAL_COUNT)
+        $('body').html(all_trials[TRIAL_COUNT]);
         now = Date.now();
         nextTrialArray();
       }

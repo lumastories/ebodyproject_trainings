@@ -23,7 +23,7 @@ TODO
 
 ## Visual search
 
- - [ ] Can you add a line of code that prevents the same photos from being the target multiple times in the same block?
- - [ ] Between blocks it says the number correct, can we please add out of how many?
- - [ ] If you click on multiple photos, the program will quickly flip through multiple arrays.  Would it be possible to record only one response (the first response) for each trial?  Presumably, the participants won’t be clicking multiple photos often but if someone changes their mind last second and tries to click another photo it would be nice if the program didn’t skip an array.
+ - [X] Can you add a line of code that prevents the same photos from being the target multiple times in the same block?
+ - [X] Between blocks it says the number correct, can we please add out of how many?
+ - [X] If you click on multiple photos, the program will quickly flip through multiple arrays.  Would it be possible to record only one response (the first response) for each trial?  Presumably, the participants won’t be clicking multiple photos often but if someone changes their mind last second and tries to click another photo it would be nice if the program didn’t skip an array.
  - [X] The photos are really small.  Can we make the arrays 5 across by 3 down and make the photos larger?  Or if you have better ideal as how we can make the photos larger, I’m open to hear it.  Eric does not want participants to have to scroll to make a response..
