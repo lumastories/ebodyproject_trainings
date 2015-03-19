@@ -6,19 +6,31 @@ var welcome_block = {
   text:"<h2>Instructions</h2> <p>During this game, you will see a grid of 16 photographs of models. It is your job to click on the image of the average weight woman as quickly as you can. This is a tough task! She will be surrounded by ultra-thin women.</p><p>Do your best to respond as quickly and accurately as possible.</p>Click <a href='#' id='skippy'>here</a> to continue.</p>",
   is_html:true
 }
+console.log(stim_ultra.slice(0,14).concat(_.sample(stim_average)));
 
 var trial = {
-  type: "visual-search-grid",
-  stimuli: stim_ultra.slice(0,14).concat(_.sample(stim_average)),
-  correct_index: 15,
-  grid_width: 5,
-  grid_height: 3
+  type: "vis-grid",
+  images: stim_ultra.slice(0,14).concat(_.sample(stim_average)),
+  correct: 14,
+  width: 5,
+  height: 3
 }
+var trial2 = {
+  type: "vis-grid",
+  images: stim_ultra.slice(2,16).concat(_.sample(stim_average)),
+  correct: 14,
+  width: 5,
+  height: 3
+}
+console.log(trial);
 
 var experiment = [];
 experiment.push(welcome_block);
 experiment.push(trial);
+experiment.push(trial2);
+experiment.push(welcome_block);
 
+console.log(experiment);
 
 jsPsych.init({
   experiment_structure: experiment
