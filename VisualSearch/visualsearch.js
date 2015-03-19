@@ -3,10 +3,10 @@ var stim_ultra = ['Stimuli/vUltraT1.jpg', 'Stimuli/vUltraT2.jpg', 'Stimuli/vUltr
 var RESULTS = [];
 var ALL_RESULTS = [];
 
-var MATRIX_X_SIZE = 3; // across
-var MATRIX_Y_SIZE = 5; // width
-var TRIALS_PER_BLOCK = 30;
-var BLOCK_NUM = 4;
+var MATRIX_X_SIZE = 3; // across 3
+var MATRIX_Y_SIZE = 5; // width 5
+var TRIALS_PER_BLOCK = 30; // 30
+var BLOCK_NUM = 4; //4
 var TRIAL_COUNT = 0;
 
 
@@ -132,17 +132,17 @@ function nextTrialArray(){
       if(TRIALS_PER_BLOCK*BLOCK_NUM==TRIAL_COUNT){
           // Last trial scores and ALL scores.
           $('body').html(function(){var score = getScore();
-        return "<p>Great work! These are your totals for the game:</p><ul><li><strong># correct</strong> <span style='color:red;'>"+
-        score.num_correct+"</span></li><li><strong>% correct</strong> <span style='color:red;'>"+
-        score.percent+"%</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
-        getAverageRT()+"ms</span></li></ul> <p>Congratulations on finishing Module 5!</p>";});
+        return "<div style='width:600px;margin:0 auto;'><p>Great work! These are your totals for the game:</p><ul><li><strong># correct</strong> <span style='color:purple;'>"+
+        score.num_correct+"</span></li><li><strong>% correct</strong> <span style='color:purple;'>"+
+        score.percent+"</span></li><li><strong>Average RT</strong> <span style='color:purple;'>"+
+        getAverageRT()+"</span></li></ul> <p>Congratulations on finishing Module 5!</p></div>";});
       }else if(TRIAL_COUNT/TRIALS_PER_BLOCK==1){
         $('body').html(function(){
           var score = getScore();
-          return "<p>Let's take a look at how you're doing:</p><ul><li><strong># correct</strong> <span style='color:red;'>"+
-        score.num_correct+"</span></li><li><strong>% correct</strong> <span style='color:red;'>"+
-        score.percent+"%</span></li><li><strong>Average RT</strong> <span style='color:red;'>"+
-        getAverageRT()+"ms</span></li></ul> <p>Nice job! Let's see if you can respond even faster this time around!</p><p>Click <a href='#' id='skippy'>here</a> to continue.</p>";});
+          return "<div style='width:600px;margin:0 auto;'><p>Let's take a look at how you're doing:</p><ul><li><strong># correct</strong> <span style='color:purple;'>"+
+        score.num_correct+"</span></li><li><strong>% correct</strong> <span style='color:purple;'>"+
+        score.percent+"</span></li><li><strong>Average RT</strong> <span style='color:purple;'>"+
+        getAverageRT()+"</span></li></ul> <p>Nice job! Let's see if you can respond even faster this time around!</p><p>Click <a href='#' id='skippy'>here</a> to continue.</p></div>";});
         skipOnKey();
         now = Date.now();
         nextTrialArray();
