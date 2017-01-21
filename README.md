@@ -1,5 +1,9 @@
-# ebodyproject_trainings
-go/go-no training, dot-probe training, visual search training
+# e-body project trainings
+:wink: [demo](http://lumastories.github.io/ebodyproject_trainings/)
+
+ - go/go-no 
+ - dot-probe 
+ - visual search 
 
 To install required assets simply run `bower install`
 
